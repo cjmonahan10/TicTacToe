@@ -49,6 +49,7 @@ const gameController = (function () {
     const playMove = (index) => {
         if (gameboard.getCellValue(index) === ""){
             gameboard.changeCell(index, activePlayer.value);
+            checkDraw();
             checkWin();
             changePlayer();
         }
@@ -83,6 +84,14 @@ const gameController = (function () {
                 haveWinner = activePlayer.name;
             }
         });
+    }
+
+    const checkDraw = () => {
+        let board = gameboard.getBoard();
+        if (!board.includes("")){
+            haveWinner = "draw";
+            console.log("draw");
+        }
     }
 
     const reset = () => {
@@ -130,7 +139,11 @@ const screenController = (function () {
     };
 
     const endGame = () => {
-        if(gameController.getWinner() !== ""){
+        if(gameController.getWinner() === "draw"){
+            cellContainer.removeEventListener("click", clickHandler);
+            playerTurn.textContent = "Its a draw!";
+        }
+        else if(gameController.getWinner() !== ""){
             cellContainer.removeEventListener("click", clickHandler);
             playerTurn.textContent = `${gameController.getWinner()} wins!`;
         }
@@ -158,7 +171,6 @@ const screenController = (function () {
 
     updateScreen();
 
-    return {updateScreen};
 })();
 
 
