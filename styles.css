@@ -1,0 +1,16 @@
+.container  {
+    height: 66vh;
+    width: 66vh;
+    background-color: blue;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.cell {
+    height: 20vh;
+    width: 20vh;
+    background-color: white;
+}
